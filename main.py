@@ -548,7 +548,7 @@ def main_loop():
             for row in otps:
                 try:
                     time_ = row[0]
-                    country = row[1].split("-")[0]
+                    country = row[1].split()[0]
                     number = row[2]
                     sender = row[3]
                     message = row[5]
