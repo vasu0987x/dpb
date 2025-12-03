@@ -17,7 +17,7 @@ from datetime import datetime, timedelta
 from collections import deque
 
 # ==================== CONFIG ====================
-BOT_TOKEN = os.getenv("BOT_TOKEN") or "8365487426:AAEXbv7J0Uavro3QncIoQbY-OozLgtYJepM"
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = 8195360535
 bot = telebot.TeleBot(BOT_TOKEN, parse_mode="HTML")
 
@@ -27,7 +27,7 @@ DB_FILE = "bot_database.db"
 os.makedirs(NUMBERS_DIR, exist_ok=True)
 
 # API Config
-API_TOKEN = os.getenv("API_TOKEN") or "R09SRzRSQkFIYFNhU4xyVlqKiWR1f4V2dG2VYl9ti0NCh3FkYW51"
+API_TOKEN = os.getenv("API_TOKEN")
 BASE_URL = "http://51.77.216.195/crapi/mait"
 OTP_GROUP_ID = "-1002129550700"
 BACKUP = "https://t.me/Vasuhub"
