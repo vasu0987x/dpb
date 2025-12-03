@@ -28,7 +28,7 @@ os.makedirs(NUMBERS_DIR, exist_ok=True)
 
 # API Config
 API_TOKEN = os.getenv("API_TOKEN")
-BASE_URL = "http://51.77.216.195/crapi/dgroup/viewstats"
+BASE_URL = "http://51.77.216.195/crapi/dgroup"
 OTP_GROUP_ID = "-1002129550700"
 BACKUP = "https://t.me/UXOTP"
 CHANNEL_LINK = "https://t.me/uxOTPbot"
