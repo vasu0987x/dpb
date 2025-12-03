@@ -1,1 +1,1 @@
-web: python dpanell.py
+web: python main.py
