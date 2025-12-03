@@ -30,8 +30,8 @@ os.makedirs(NUMBERS_DIR, exist_ok=True)
 API_TOKEN = os.getenv("API_TOKEN")
 BASE_URL = "http://51.77.216.195/crapi/dgroup/viewstats"
 OTP_GROUP_ID = "-1002129550700"
-BACKUP = "https://t.me/Vasuhub"
-CHANNEL_LINK = "https://t.me/Nokosxbot"
+BACKUP = "https://t.me/UXOTP"
+CHANNEL_LINK = "https://t.me/uxOTPbot"
 
 # ==================== QUEUES ====================
 group_queue = Queue(maxsize=1000)
@@ -91,7 +91,7 @@ temp_uploads = {}
 last_change_time = {}
 active_users = set()
 past_otp_fetch_cooldown = {}  # Rate limiting for past OTP fetches
-REQUIRED_CHANNELS = ["@Vasuhub", "@DDxOTP", "@NokosxOTP", "@DDXBACKUP"]
+REQUIRED_CHANNELS = ["@Vasuhub", "@DDxOTP", "@NokosxOTP", "@UXOTP"]
 
 # ==================== DATA FUNCTIONS ====================
 def load_data():
