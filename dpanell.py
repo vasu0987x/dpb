@@ -28,7 +28,7 @@ os.makedirs(NUMBERS_DIR, exist_ok=True)
 
 # API Config
 API_TOKEN = os.getenv("API_TOKEN")
-BASE_URL = "http://51.77.216.195/crapi/mait"
+BASE_URL = "http://51.77.216.195/crapi/dgroup/viewstats"
 OTP_GROUP_ID = "-1002129550700"
 BACKUP = "https://t.me/Vasuhub"
 CHANNEL_LINK = "https://t.me/Nokosxbot"
