@@ -732,7 +732,7 @@ def send_random_number(chat_id, country=None, edit=False):
         types.InlineKeyboardButton("📜 View Past OTPs", callback_data=f"view_past_{number}")
     )
     markup.row(
-        types.InlineKeyboardButton("📢 OTP Group", url=f"https://t.me/+9oYo5yC5HwYzZGI9")
+        types.InlineKeyboardButton("📢 OTP Group", url=f"https://t.me/+MlA5LDG7LslmNmM1")
     )
 
     if chat_id in user_messages and edit:
