@@ -29,7 +29,7 @@ os.makedirs(NUMBERS_DIR, exist_ok=True)
 # API Config
 API_TOKEN = os.getenv("API_TOKEN")
 BASE_URL = "http://51.77.216.195/crapi/dgroup"
-OTP_GROUP_ID = "-1002168300949"
+OTP_GROUP_ID = "-1002445692794"
 BACKUP = "https://t.me/UXOTP"
 CHANNEL_LINK = "https://t.me/uxOTPbot"
 
@@ -690,8 +690,8 @@ def send_random_number(chat_id, country=None, edit=False):
     now = time.time()
     
     # Rate limiting
-    if chat_id in last_change_time and now - last_change_time[chat_id] < 10:
-        wait = 10 - int(now - last_change_time[chat_id])
+    if chat_id in last_change_time and now - last_change_time[chat_id] < 1:
+        wait = 1 - int(now - last_change_time[chat_id])
         bot.send_message(chat_id, f"⏳ Wait {wait}s before changing number")
         return
     
@@ -732,7 +732,7 @@ def send_random_number(chat_id, country=None, edit=False):
         types.InlineKeyboardButton("📜 View Past OTPs", callback_data=f"view_past_{number}")
     )
     markup.row(
-        types.InlineKeyboardButton("📢 OTP Group", url=f"https://t.me/+MlA5LDG7LslmNmM1")
+        types.InlineKeyboardButton("📢 OTP Group", url=f"https://t.me/+LC6zwjQTXJ81ZjRl")
     )
 
     if chat_id in user_messages and edit:
