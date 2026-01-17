@@ -49,7 +49,7 @@ AUTO_DELETE_MINUTES = 0  # 0 means disabled
 CHANNEL_LINK = "https://whatsapp.com/channel/0029Va5XJaU6xCSHlSwIXH1P"
 BACKUP = "https://t.me/VASUHUB"
 DEVELOPER_ID = "@UXOTPBOT"
-CODE_GROUP = "https://t.me/+jey8AyDtbJ9hM2M1"
+CODE_GROUP = "https://t.me/+aXIW_HL5DCdhNzhl"
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0",
