@@ -683,6 +683,10 @@ def send_random_numbers(chat_id, country=None, edit=False):
   
     markup = types.InlineKeyboardMarkup()
     markup.row(
+        types.InlineKeyboardButton("🔄 New Numbers", callback_data="change_number"),
+        types.InlineKeyboardButton("🌎 Change Country", callback_data="change_country")
+    )
+    markup.row(
         types.InlineKeyboardButton("📱 Code Group", url=CODE_GROUP)
     )
 
@@ -1233,7 +1237,3 @@ if __name__ == "__main__":
     
     while True:
         time.sleep(60)
-        types.InlineKeyboardButton("🔄 New Numbers", callback_data="change_number"),
-        types.InlineKeyboardButton("🌎 Change Country", callback_data="change_country")
-    )
-    markup.row(
