@@ -1065,30 +1065,35 @@ def save_new_country(message, numbers):
 
 @bot.message_handler(commands=["exportusers"])
 def export_users(message):
-    if message.from_user.id != ADMIN_ID: 
+    if message.from_user.id != ADMIN_ID:
         return
 
-    conn = sqlite3.connect(DB_FILE, check_same_thread=False)
-    
-    # ✅ Correct table
-    db_users = [str(r[0]) for r in conn.execute("SELECT chat_id FROM active_users").fetchall()]
-    
-    conn.close()
-    
-    # Combine with runtime users
-    all_ids = set(db_users) | {str(uid) for uid in active_users}
-    
-    if not all_ids:
-        bot.reply_to(message, "❌ Koi user nahi mila.")
-        return
-    
-    content = "\n".join(sorted(all_ids)).encode("utf-8")
-    
-    bot.send_document(
-        message.chat.id,
-        ("users.txt", content, "text/plain"),
-        caption=f"✅ Total Users: {len(all_ids)}"
-    )
+    try:
+        with get_db() as conn:
+            cursor = conn.cursor()
+            
+            # ✅ FIXED TABLE NAME
+            cursor.execute("SELECT chat_id FROM active_users")
+            db_users = [str(row[0]) for row in cursor.fetchall()]
+
+        # RAM + DB combine (optional)
+        all_ids = set(db_users) | {str(uid) for uid in active_users}
+
+        if not all_ids:
+            bot.reply_to(message, "❌ Koi user nahi mila.")
+            return
+
+        content = "\n".join(sorted(all_ids)).encode("utf-8")
+
+        bot.send_document(
+            message.chat.id,
+            ("users.txt", content, "text/plain"),
+            caption=f"✅ Total Users: {len(all_ids)}"
+        )
+
+    except Exception as e:
+        logger.error(f"Export error: {e}")
+        bot.reply_to(message, "❌ Export failed")
     
 @bot.message_handler(commands=["setcountry"])
 def set_country(message):
