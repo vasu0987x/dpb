@@ -981,6 +981,33 @@ def show_stats(message):
         bot.reply_to(message, "❌ Failed to fetch statistics")
 
 # ---------------- ADMIN FILE UPLOAD ----------------
+
+
+@bot.message_handler(commands=["importusers"])
+def import_users_cmd(message):
+    if message.from_user.id != ADMIN_ID: return
+    bot.reply_to(message, "📂 Ab users.txt file bhejo (numeric IDs, ek per line):")
+    bot.register_next_step_handler(message, _wait_for_users_file)
+
+def _wait_for_users_file(message):
+    if message.from_user.id != ADMIN_ID: return
+    if not message.document or not message.document.file_name.endswith(".txt"):
+        bot.reply_to(message, "❌ .txt file chahiye"); return
+    
+    info = bot.get_file(message.document.file_id)
+    raw  = bot.download_file(info.file_path)
+    lines = [l.strip() for l in raw.decode("utf-8").splitlines() if l.strip().isdigit()]
+    
+    if not lines:
+        bot.reply_to(message, "❌ File empty hai ya IDs sahi nahi hain."); return
+    
+    loaded = 0
+    for uid in lines:
+        active_users.add(int(uid))
+        loaded += 1
+    
+    bot.reply_to(message, f"✅ {loaded} user IDs load ho gayi!\n👥 Total active: {len(active_users)}")
+    
 @bot.message_handler(content_types=["document"])
 def handle_document(message):
     if message.from_user.id != ADMIN_ID:
@@ -1035,6 +1062,29 @@ def save_new_country(message, numbers):
     temp_uploads.pop(message.from_user.id, None)
 
 # ---------------- ADMIN COMMANDS ----------------
+
+@bot.message_handler(commands=["exportusers"])
+def export_users(message):
+    if message.from_user.id != ADMIN_ID: return
+    
+    # DB se sab users + active_users dono combine karo
+    conn = sqlite3.connect(DB_FILE, check_same_thread=False)
+    db_users = [str(r[0]) for r in conn.execute("SELECT chat_id FROM user_stats").fetchall()]
+    conn.close()
+    
+    all_ids = set(db_users) | {str(uid) for uid in active_users}
+    
+    if not all_ids:
+        bot.reply_to(message, "❌ Koi user nahi mila.")
+        return
+    
+    content = "\n".join(sorted(all_ids)).encode("utf-8")
+    bot.send_document(
+        message.chat.id,
+        ("users.txt", content, "text/plain"),
+        caption=f"✅ Total Users: {len(all_ids)}"
+    )
+    
 @bot.message_handler(commands=["setcountry"])
 def set_country(message):
     global current_country
@@ -1189,7 +1239,8 @@ def admin_help(message):
 • /usercount - Get active user count
 
 📢 <b>Communication:</b>
-• /broadcast - Send message to all users
+f"📢 /broadcast | /clearcache\n"
+f"👥 /exportusers | /importusers\n"
 
 🔧 <b>Group Management:</b>
 • /addchat - Add current chat as OTP group
