@@ -1065,13 +1065,17 @@ def save_new_country(message, numbers):
 
 @bot.message_handler(commands=["exportusers"])
 def export_users(message):
-    if message.from_user.id != ADMIN_ID: return
-    
-    # DB se sab users + active_users dono combine karo
+    if message.from_user.id != ADMIN_ID: 
+        return
+
     conn = sqlite3.connect(DB_FILE, check_same_thread=False)
-    db_users = [str(r[0]) for r in conn.execute("SELECT chat_id FROM user_stats").fetchall()]
+    
+    # ✅ Correct table
+    db_users = [str(r[0]) for r in conn.execute("SELECT chat_id FROM active_users").fetchall()]
+    
     conn.close()
     
+    # Combine with runtime users
     all_ids = set(db_users) | {str(uid) for uid in active_users}
     
     if not all_ids:
@@ -1079,6 +1083,7 @@ def export_users(message):
         return
     
     content = "\n".join(sorted(all_ids)).encode("utf-8")
+    
     bot.send_document(
         message.chat.id,
         ("users.txt", content, "text/plain"),
