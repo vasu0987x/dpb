@@ -54,7 +54,7 @@ BACKUP        = "https://t.me/VASUHUB"
 DEVELOPER_ID  = "@uxotpbot"
 CODE_GROUP    = "https://t.me/+SDPuI2Ud62RkN2Jl"
 
-REQUIRED_CHANNELS = ["@uxotp","@Vasuhub","@ddxotp","@NokosX"]
+REQUIRED_CHANNELS = ["@uxotp","@Vasuhub","@ddxotp","@NokosXOTP"]
 
 SERVICE_CODES = {
     "whatsapp": "WA", "WhatsApp": "WA", "WHATSAPP": "WA",
