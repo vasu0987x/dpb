@@ -1,1 +1,1 @@
-web: python newpurple.py
+web: python app.py
