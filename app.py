@@ -1423,7 +1423,7 @@ def _wallet_step_kb(message, chat_id):
 def kb_support(message):
     markup = types.InlineKeyboardMarkup()
     markup.row(
-        types.InlineKeyboardButton("💬 Contact Support", url=f"https://t.me/{DEVELOPER_ID.lstrip('@')}")
+        types.InlineKeyboardButton("💬 Contact Support", url=f"https://t.me/vasuhubbot")
     )
     markup.row(
         types.InlineKeyboardButton("📢 Channel", url=CHANNEL_LINK),
@@ -1433,7 +1433,7 @@ def kb_support(message):
         f"🆘 <b>Support</b>\n"
         f"━━━━━━━━━━━━━━━\n"
         f"For help, tap the button below or contact:\n"
-        f"<b>{html.escape(DEVELOPER_ID)}</b>",
+        f"<b>@Vasuhubbot</b>",
         parse_mode="HTML", reply_markup=markup)
 
 
