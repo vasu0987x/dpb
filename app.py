@@ -1185,10 +1185,16 @@ def send_random_numbers(chat_id, country=None, edit=False):
     )
 
     inline = types.InlineKeyboardMarkup()
+
     inline.row(
-        types.InlineKeyboardButton("🔄 New Numbers",    callback_data="change_number"),
-        types.InlineKeyboardButton("🌎 Change Country", callback_data="change_country")
-    )
+    types.InlineKeyboardButton("🔄 New Numbers", callback_data="change_number"),
+    types.InlineKeyboardButton("🌎 Change Country", callback_data="change_country")
+)
+
+# CHANNEL LINK BUTTON 👇
+    inline.row(
+    types.InlineKeyboardButton("📩 OTP GC", url="https://t.me/+SDPuI2Ud62RkN2Jl")
+)
 
     if chat_id in user_messages and edit:
         try:
