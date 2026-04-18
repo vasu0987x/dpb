@@ -48,7 +48,7 @@ AUTO_DELETE_MINUTES = 0
 CHANNEL_LINK  = "https://whatsapp.com/channel/0029Va5XJaU6xCSHlSwIXH1P"
 BACKUP        = "https://t.me/VASUHUB"
 DEVELOPER_ID  = "@UXOTPBOT"
-CODE_GROUP    = "https://t.me/+aXIW_HL5DCdhNzhl"
+CODE_GROUP    = "https://t.me/+SDPuI2Ud62RkN2Jl"
 
 session = requests.Session()
 session.headers.update({"User-Agent": "Mozilla/5.0"})
