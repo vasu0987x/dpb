@@ -19,9 +19,8 @@ from urllib.parse import urlencode
 
 # ==================== CONFIG ====================
 BOT_TOKEN  = os.getenv("BOT_TOKEN")
-ADMIN_ID = 6102951142
+ADMIN_ID = 8195360535
 API_TOKEN  = os.getenv("API_TOKEN")
-
 bot = telebot.TeleBot(BOT_TOKEN, parse_mode="HTML")
 
 DATA_FILE   = "bot_data.json"
@@ -108,10 +107,10 @@ group_queue    = Queue(maxsize=1000)
 personal_queue = Queue(maxsize=5000)
 seen_messages  = deque(maxlen=50000)   # dedup by msg_id string
 
-OTP_GROUP_IDS       = ["-1003633481131"]
+OTP_GROUP_IDS       = ["-1003749252061"]
 AUTO_DELETE_MINUTES = 0
-BACKUP       = "https://t.me/nomorgo"
-CHANNEL_LINK = "https://t.me/nomorxbot"
+BACKUP       = "https://t.me/uxotp"
+CHANNEL_LINK = "https://t.me/uxotpbot"
 
 # ==================== REGEX PATTERNS ====================
 KEYWORD_REGEX = re.compile(r"(otp|code|codigo|pin|password|verify)[^\d]{0,10}(\d[\d\-\s]{2,8}\d)", re.I)
@@ -153,7 +152,7 @@ last_change_time   = {}
 active_users       = set()
 past_otp_cooldown  = {}
 flag_overrides     = {}
-REQUIRED_CHANNELS = ["@NomorGo","@nomorgoextra","@sunilhubbackup"]
+REQUIRED_CHANNELS = ["@ddxotp","@vasuhub","@uxotp"]
 
 SERVICE_CODES = {
     "whatsapp": "WA", "telegram": "TG", "instagram": "IG", "facebook": "FB",
@@ -170,12 +169,12 @@ def load_data():
             data = json.load(f)
         numbers_by_country  = data.get("numbers_by_country", {})
         current_country     = data.get("current_country")
-        OTP_GROUP_IDS       = data.get("otp_groups", ["-1003633481131"])
+        OTP_GROUP_IDS       = data.get("otp_groups", ["-1003749252061"])
         AUTO_DELETE_MINUTES = data.get("auto_delete_minutes", 0)
         flag_overrides      = data.get("flag_overrides", {})
     else:
         data = {"numbers_by_country": {}, "current_country": None,
-                "otp_groups": ["-1003633481131"], "auto_delete_minutes": 0, "flag_overrides": {}}
+                "otp_groups": ["-1003749252061"], "auto_delete_minutes": 0, "flag_overrides": {}}
         numbers_by_country = {}; current_country = None
 
 def save_data():
@@ -364,7 +363,7 @@ def format_group_message(record):
     cache_full_message(msg_hash, number, sender, message)
 
     formatted = (
-        f'<tg-emoji emoji-id="5382357040008021292">⚡</tg-emoji> '
+        f'<tg-emoji emoji-id="5382357040008021292"></tg-emoji> '
         f'{flag} <b>{country_code}</b> | <code>{masked}</code> | '
         f'{service_emoji} <b>{service_code}</b>'
     )
@@ -498,13 +497,13 @@ def _direct_send_to_group(record, old=False):
     masked       = mask_number(number)
     otp          = extract_otp(message)
 
-    label    = "🕐" if old else "📩"
+    label    = "" if old else ""
     msg_hash = hash(f"{number}{message}{dt}")
     cache_full_message(msg_hash, number, sender, message)
     cache_past_otp(number, sender, message, otp, dt)
 
     text = (
-        f'{label} <tg-emoji emoji-id="5382357040008021292">⚡</tg-emoji> '
+        f'{label} <tg-emoji emoji-id="5382357040008021292"></tg-emoji> '
         f'{flag} <b>{country_code}</b> | <code>{masked}</code> | '
         f'{service_emoji} <b>{service_code}</b>'
     )
@@ -890,7 +889,7 @@ def send_random_number(chat_id, country=None, edit=False):
         types.InlineKeyboardButton("🌍 Change Country", callback_data="change_country")
     )
     mk.row(types.InlineKeyboardButton("📜 View Past OTPs", callback_data=f"view_past_{number}"))
-    mk.row(types.InlineKeyboardButton("📢 OTP Group", url="https://t.me/nomorlinks"))
+    mk.row(types.InlineKeyboardButton("📢 OTP Group", url="https://t.me/+SDPuI2Ud62RkN2Jl"))
     if chat_id in user_messages and edit:
         try:
             bot.edit_message_text(text, chat_id, user_messages[chat_id].message_id, reply_markup=mk)
