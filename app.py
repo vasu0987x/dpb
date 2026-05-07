@@ -46,7 +46,7 @@ DB_FILE     = "otp_data.db"
 
 os.makedirs(NUMBERS_DIR, exist_ok=True)
 
-OTP_GROUP_IDS       = ["-1003749252061"]
+OTP_GROUP_IDS       = ["-1003702001619"]
 AUTO_DELETE_MINUTES = 0
 
 CHANNEL_LINK  = "https://t.me/UXOTP"
@@ -489,7 +489,7 @@ def load_data():
                 data                = json.load(f)
                 numbers_by_country  = data.get("numbers_by_country", {}) or {}
                 current_country     = data.get("current_country")
-                OTP_GROUP_IDS       = data.get("otp_groups", ["-1003749252061"])
+                OTP_GROUP_IDS       = data.get("otp_groups", ["-1003702001619"])
                 AUTO_DELETE_MINUTES = data.get("auto_delete_minutes", 0)
         except Exception as e:
             logger.error(f"Failed to load data: {e}")
@@ -498,7 +498,7 @@ def load_data():
     else:
         data                = {}
         numbers_by_country  = {}
-        OTP_GROUP_IDS       = ["-1003749252061"]
+        OTP_GROUP_IDS       = ["-1003702001619"]
         AUTO_DELETE_MINUTES = 0
 
 
