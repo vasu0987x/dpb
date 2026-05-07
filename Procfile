@@ -1,1 +1,1 @@
-web: python zone.py
+web: python app.py
