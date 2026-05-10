@@ -37,15 +37,15 @@ ADMIN_USER_IDS     = [8195360535]
 # ╔══════════════════════════════════════════════════════════════╗
 # ║                   INLINE BUTTON LINKS                        ║
 # ╚══════════════════════════════════════════════════════════════╝
-PANEL_LINK     = "https://t.me/DDXOTPBOT"
-CHANNEL_LINK   = "https://t.me/ddxotp"
+PANEL_LINK     = "https://t.me/UXOTPBOT"
+CHANNEL_LINK   = "https://t.me/UXOTP"
 OTP_GROUP_LINK = "https://t.me/+SDPuI2Ud62RkN2Jl"
 
 # ╔══════════════════════════════════════════════════════════════╗
 # ║               FORCE SUBSCRIBE CONFIGURATION                  ║
 # ╚══════════════════════════════════════════════════════════════╝
 FORCE_SUB_CHANNELS = [
-    {"channel_id": "@DDXOTP",  "channel_name": "DDXOTP",  "link": "https://t.me/ddxotp"},
+    {"channel_id": "@DDXOTP",  "channel_name": "DDXOTP",  "link": "https://t.me/UXOTP"},
     {"channel_id": "@VASUHUB", "channel_name": "VASUHUB", "link": "https://t.me/vasuhub"},
 ]
 FORCE_SUB_ENABLED = True
