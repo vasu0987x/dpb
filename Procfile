@@ -1,1 +1,1 @@
-web: python IVAS.PY
+web: python newgrand.py
