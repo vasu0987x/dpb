@@ -31,8 +31,8 @@ API_TOKEN = os.getenv("API_TOKEN")
 BASE_URL = "http://147.135.212.197/crapi/st"
 OTP_GROUP_IDS = ["-1003462043194"]
 AUTO_DELETE_MINUTES = 0  # 0 means disabled
-BACKUP = "https://t.me/DDXOTP"
-CHANNEL_LINK = "https://t.me/ddxotpbot"
+BACKUP = "https://t.me/uxotp"
+CHANNEL_LINK = "https://t.me/uxotpbot"
 
 # ==================== QUEUES ====================
 group_queue = Queue(maxsize=1000)
