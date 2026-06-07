@@ -498,6 +498,13 @@ def fetch_all_numbers_from_api():
     try:
         session = create_session()
         csrf = login(session)
+
+        # ── Fresh CSRF portal/numbers page se lo ──
+        r = session.get(PORTAL_URL + "/numbers", timeout=HTTP_TIMEOUT)
+        fresh_csrf = extract_csrf(r.text)
+        if fresh_csrf:
+            csrf = fresh_csrf
+
         params = {
             'draw': '1',
             'columns[0][data]': 'number_id', 'columns[0][name]': 'id',
@@ -517,12 +524,50 @@ def fetch_all_numbers_from_api():
             'X-Requested-With': 'XMLHttpRequest',
             'X-CSRF-TOKEN': csrf,
             'Accept': 'application/json, text/javascript, */*; q=0.01',
-            'Referer': PORTAL_URL + '/numbers'
+            'Referer': PORTAL_URL + '/numbers',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         }
-        r = session.get(NUMBERS_API_URL, params=params, headers=headers, timeout=HTTP_TIMEOUT)
+        r = session.get(
+            NUMBERS_API_URL,
+            params=params,
+            headers=headers,
+            timeout=HTTP_TIMEOUT
+        )
+        print(f"📡 Numbers API status: {r.status_code}")
+        if r.status_code == 403:
+            # Cookie session expire — retry with credential login
+            print("🔄 403 on numbers API, retrying with fresh credential login...")
+            session2 = create_session()
+            # Force credential login (skip cookies)
+            r2 = session2.get(LOGIN_URL, timeout=HTTP_TIMEOUT)
+            csrf2 = extract_csrf(r2.text)
+            if not csrf2:
+                print("❌ Could not get CSRF for credential login")
+                return {}
+            session2.post(LOGIN_URL, data={
+                "email": EMAIL,
+                "password": PASSWORD,
+                "_token": csrf2,
+                "submit": "register"
+            }, timeout=HTTP_TIMEOUT)
+            r3 = session2.get(PORTAL_URL + "/numbers", timeout=HTTP_TIMEOUT)
+            csrf3 = extract_csrf(r3.text) or csrf2
+            headers['X-CSRF-TOKEN'] = csrf3
+            r = session2.get(
+                NUMBERS_API_URL,
+                params=params,
+                headers=headers,
+                timeout=HTTP_TIMEOUT
+            )
+            print(f"📡 Retry status: {r.status_code}")
+            if r.status_code != 200:
+                print(f"❌ Retry also failed: {r.status_code}")
+                return {}
+
         if r.status_code != 200:
             print(f"❌ API request failed: {r.status_code}")
             return {}
+
         data = r.json()
         numbers_data = data.get('data', [])
         country_dict = {}
@@ -542,6 +587,7 @@ def fetch_all_numbers_from_api():
     except Exception as e:
         print(f"❌ Error fetching numbers: {e}")
         return {}
+        
 
 def refresh_numbers_cache():
     global NUMBERS_CACHE
