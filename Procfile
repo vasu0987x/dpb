@@ -1,1 +1,1 @@
-web: python ivass.py
+web: python npp.py
