@@ -726,7 +726,7 @@ def main_loop():
                     country = row[1].split()[0]
                     number = row[2]
                     sender = row[3]
-                    message = row[5]
+                    message = row[4]
 
                     hash_id = hashlib.md5((str(number) + str(time_) + str(message)).encode()).hexdigest()
                     if hash_id in seen_messages:
