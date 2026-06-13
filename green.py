@@ -43,7 +43,7 @@ os.makedirs(NUMBERS_DIR, exist_ok=True)
 LOGIN_URL = "http://139.99.9.4/ints/signin"
 XHR_URL = "http://139.99.9.4/ints/agent/res/data_smscdr.php?fdate1=2026-06-13%2000:00:00&fdate2=2027-06-13%2023:59:59&frange=&fclient=&fnum=&fcli=&fgdate=&fgmonth=&fgrange=&fgclient=&fgnumber=&fgcli=&fg=0&sesskey=Q05RR0FUUERCTw==&sEcho=1&iColumns=9&sColumns=%2C%2C%2C%2C%2C%2C%2C%2C&iDisplayStart=0&iDisplayLength=25&mDataProp_0=0&sSearch_0=&bRegex_0=false&bSearchable_0=true&bSortable_0=true&mDataProp_1=1&sSearch_1=&bRegex_1=false&bSearchable_1=true&bSortable_1=true&mDataProp_2=2&sSearch_2=&bRegex_2=false&bSearchable_2=true&bSortable_2=true&mDataProp_3=3&sSearch_3=&bRegex_3=false&bSearchable_3=true&bSortable_3=true&mDataProp_4=4&sSearch_4=&bRegex_4=false&bSearchable_4=true&bSortable_4=true&mDataProp_5=5&sSearch_5=&bRegex_5=false&bSearchable_5=true&bSortable_5=true&mDataProp_6=6&sSearch_6=&bRegex_6=false&bSearchable_6=true&bSortable_6=true&mDataProp_7=7&sSearch_7=&bRegex_7=false&bSearchable_7=true&bSortable_7=true&mDataProp_8=8&sSearch_8=&bRegex_8=false&bSearchable_8=true&bSortable_8=false&sSearch=&bRegex=false&iSortCol_0=0&sSortDir_0=desc&iSortingCols=1&_=1781351564606" 
 
-OTP_GROUP_IDS = ["-1003462043194"]
+OTP_GROUP_IDS = ["-1003633481131"]
 AUTO_DELETE_MINUTES = 0  # 0 means disabled
 
 CHANNEL_LINK = "https://whatsapp.com/channel/0029Va5XJaU6xCSHlSwIXH1P"
@@ -286,20 +286,20 @@ def load_data():
                 data = json.load(f)
                 numbers_by_country = data.get("numbers_by_country", {}) or {}
                 current_country = data.get("current_country")
-                OTP_GROUP_IDS = data.get("otp_groups", ["-1003672667505"])
+                OTP_GROUP_IDS = data.get("otp_groups", ["-1003633481131"])
                 AUTO_DELETE_MINUTES = data.get("auto_delete_minutes", 0)
         except Exception as e:
             logger.error(f"Failed to load data: {e}")
-            data = {"numbers_by_country": {}, "current_country": None, "otp_groups": ["-1003672667505"], "auto_delete_minutes": 0}
+            data = {"numbers_by_country": {}, "current_country": None, "otp_groups": ["-1003633481131"], "auto_delete_minutes": 0}
             numbers_by_country = {}
             current_country = None
-            OTP_GROUP_IDS = ["-1003672667505"]
+            OTP_GROUP_IDS = ["-1003633481131"]
             AUTO_DELETE_MINUTES = 0
     else:
         data = {"numbers_by_country": {}, "current_country": None, "otp_groups": ["-1003672667505"], "auto_delete_minutes": 0}
         numbers_by_country = {}
         current_country = None
-        OTP_GROUP_IDS = ["-1003672667505"]
+        OTP_GROUP_IDS = ["-1003633481131"]
         AUTO_DELETE_MINUTES = 0
 
 def save_data():
