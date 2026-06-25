@@ -1,1 +1,1 @@
-web: python npp.py
+web: python mbc.py
