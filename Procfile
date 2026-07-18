@@ -1,1 +1,1 @@
-web: python newgrand.py
+web: python hadi.py
