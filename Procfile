@@ -1,1 +1,1 @@
-web: python hadi.py
+web: python npp.py
